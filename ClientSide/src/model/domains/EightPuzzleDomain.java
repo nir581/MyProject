@@ -6,8 +6,6 @@ import java.util.Random;
 import model.algorithm.Action;
 import model.algorithm.State;
 
-
-
 public class EightPuzzleDomain implements SearchDomain {
 
 	//please pay attention, the game is initialized with a Random Start State and the Goal State is always the same one.
@@ -19,7 +17,7 @@ public class EightPuzzleDomain implements SearchDomain {
 	private static final int size = 3;
 	int puzzleStateSize;
 	private EightPuzzleState start, goal;
-	private final int numOfSwitches = 100;
+	private final int numOfSwitches = 10;
 	
 	public EightPuzzleDomain() {}
 	
@@ -84,8 +82,8 @@ public class EightPuzzleDomain implements SearchDomain {
 		String s = new String(goal.getState());
 		String temp = new String(s);
 		for (int i=1; i<numOfSwitches; i++) {
-			//System.out.println("i is "+ i);
-			//System.out.println("s is: "+s);
+			System.out.println("i is "+ i);
+			System.out.println("s is: "+s);
 			Random r = new Random();
 			int move = r.nextInt(4) + 1;	//will return an integer between 1-4, 4 different moves
 				switch (move) {
@@ -209,8 +207,7 @@ public class EightPuzzleDomain implements SearchDomain {
 		
 		String up = moveUp(state);
 		if (!up.equals("FAILED")) {
-			a= new Action(state.substring(0, size)+'\n'+state.substring(size, 2*size)+'\n'
-					+state.substring(2*size, puzzleStateSize)+'\n'+"moves UP");
+			a= new Action("up "+state);
 			newState = new MazeGameState(up);
 			double cost = getHiuristicValueOfState(newState, goal);
 			a.setCost((int)(cost));
@@ -219,8 +216,7 @@ public class EightPuzzleDomain implements SearchDomain {
 				
 		String down= moveDown(state);
 		if (!down.equals("FAILED")) {
-			a= new Action(state.substring(0, size)+'\n'+state.substring(size, 2*size)+'\n'
-					+state.substring(2*size, puzzleStateSize)+'\n'+"moves DOWN");
+			a= new Action("down "+state);
 			newState = new MazeGameState(down);
 			double cost = getHiuristicValueOfState(newState, goal);
 			a.setCost((int)(cost));
@@ -229,8 +225,7 @@ public class EightPuzzleDomain implements SearchDomain {
 			
 		String right= moveRight(state);
 		if (!right.equals("FAILED")) {
-			a= new Action(state.substring(0, size)+'\n'+state.substring(size, 2*size)+'\n'
-					+state.substring(2*size, puzzleStateSize)+'\n'+"moves RIGHT");
+			a= new Action("right "+state);
 			newState = new MazeGameState(right);
 			double cost = getHiuristicValueOfState(newState, goal);
 			a.setCost((int)(cost));
@@ -239,8 +234,7 @@ public class EightPuzzleDomain implements SearchDomain {
 			
 		String left= moveLeft(state);
 		if (!left.equals("FAILED")) {
-			a= new Action(state.substring(0, size)+'\n'+state.substring(size, 2*size)+'\n'
-					+state.substring(2*size, puzzleStateSize)+'\n'+"moves LEFT");
+			a= new Action("left "+state);
 			newState = new MazeGameState(left);
 			double cost = getHiuristicValueOfState(newState, goal);
 			a.setCost((int)(cost));

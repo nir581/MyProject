@@ -115,33 +115,6 @@ public class PuzzleGameBoard extends GameBoard {
 		return myPlayer;
 	}
 
-	/*
-	 * public void displayCurrent(String action) { int n1 = 0; int n2 = (int)
-	 * action.charAt(24) - (int) '0'; System.out.println(n2); int nx1 = -1; int
-	 * ny1 = -1; int nx2 = -1; int ny2 = -1; for (int i = 0; i < 3; i++) for
-	 * (int j = 0; j < 3; j++) { if (board[i][j] == n1) { nx1 = i; ny1 = j;
-	 * 
-	 * } if (board[i][j] == n2) { nx2 = i; ny2 = j; } } int tmp =
-	 * board[nx1][ny1]; board[nx1][ny1] = board[nx2][ny2]; board[nx2][ny2] =
-	 * tmp; // int change=(getSize().x) / board[0].length; //
-	 * myPlayer.setX(myPlayer.getX()-change); redraw(); update(); }
-	 * 
-	 * public void displaySolution(Solution solution) {
-	 * System.out.println("solution" + solution); if (solution != null) { final
-	 * ArrayList<Action> a = solution.getActions(); // timer = new Timer(); if
-	 * (a != null) { new Thread(new Runnable() {
-	 * 
-	 * @Override public void run() { for (i = 0; i < a.size(); i++) {
-	 * displayCurrent(a.get(i).getDescription()); try { Thread.sleep(900); }
-	 * catch (InterruptedException e) { e.printStackTrace(); }
-	 * 
-	 * }
-	 * 
-	 * } }).run(); } }
-	 * 
-	 * }
-	 */
-
 	public int[][] getBoard() {
 		return board;
 	}

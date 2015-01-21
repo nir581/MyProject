@@ -16,6 +16,8 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Text;
 
 import viewBoard.GameBoard;
@@ -137,12 +139,12 @@ public class PuzzleGameWindow extends GameWindow {
 				setCommandChange("solveDomain");
 				while (getSolutionRecivied() == false) {
 					try {
-						Thread.sleep(1000);
+						Thread.sleep(1500);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					setCommandChange("presentSolution: 1");
+					setCommandChange("presentSolution: 1");				//change!!!!! not 1
 				}
 
 			}
@@ -188,15 +190,31 @@ public class PuzzleGameWindow extends GameWindow {
 
 	@Override
 	public void displaySolution(Solution solution) {
+		List lstActions;
 		setSolutionRecivied(true);
 		if (solution.getActions().get(0).getDescription().equals("no solution"))
 			System.out
 					.println("SORRY, A valid solution can not be found for this specific problem. please Run again!");
 		else {
-			System.out.println("Path from Start to Goal:");
-			for (Action a : solution.getActions())
-				System.out.println(a);
-			System.out.println("End of Game !");
+
+			lstActions = new List(shell, SWT.BORDER | SWT.V_SCROLL);
+			lstActions.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
+					false, 2, 1));
+			for (int i = 0; i < solution.getActions().size(); i++) {
+				String a = solution.getActions().get(i).getDescription();
+				String[] arr = a.split(" ");
+				this.shell.getDisplay().syncExec(new Runnable() {
+
+					@Override
+					public void run() {
+						lstActions.add("Move " + arr[0]);
+					}
+				});
+			}
+			lstActions.setVisible(true);
+			shell.setSize(400, 750);
+			shell.layout();
+			board.setFocus();
 		}
 	}
 
@@ -228,8 +246,14 @@ public class PuzzleGameWindow extends GameWindow {
 
 	public void updatePuzzle() {
 		board.dispose();
-		setBoard(new PuzzleGameBoard(shell, SWT.DOUBLE_BUFFERED, this.getDescription()));
+		setBoard(new PuzzleGameBoard(shell, SWT.BORDER, this.getDescription()));
 		buildBoard();
+		if(this.getDescription().equals("123456780")){
+			MessageBox messageBox = new MessageBox(shell, SWT.ICON_INFORMATION);
+			messageBox.setMessage("Congratulation! You Win!!!!! ");
+			messageBox.open();
+			
+		}
 	}
 
 	private void buildBoard() {
@@ -247,19 +271,19 @@ public class PuzzleGameWindow extends GameWindow {
 
 				switch (k.keyCode) {
 				case SWT.ARROW_RIGHT:
-					setCommandChange("selectMoves: left " + puzzleString);
-					updatePuzzle(); // ////////////////////////////////////
-				break;
-				case SWT.ARROW_LEFT:
 					setCommandChange("selectMoves: right " + puzzleString);
 					updatePuzzle(); // ////////////////////////////////////
 				break;
+				case SWT.ARROW_LEFT:
+					setCommandChange("selectMoves: left " + puzzleString);
+					updatePuzzle(); // ////////////////////////////////////
+				break;
 				case SWT.ARROW_UP:
-					setCommandChange("selectMoves: down " + puzzleString);
+					setCommandChange("selectMoves: up " + puzzleString);
 					updatePuzzle(); // ////////////////////////////////////
 				break;
 				case SWT.ARROW_DOWN:
-					setCommandChange("selectMoves: up " + puzzleString);
+					setCommandChange("selectMoves: down " + puzzleString);
 					updatePuzzle(); // ////////////////////////////////////
 				break;
 				}

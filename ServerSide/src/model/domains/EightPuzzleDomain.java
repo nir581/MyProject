@@ -17,7 +17,7 @@ public class EightPuzzleDomain implements SearchDomain {
 	private static final int size = 3;
 	int puzzleStateSize;
 	private EightPuzzleState start, goal;
-	private final int numOfSwitches = 200;
+	private final int numOfSwitches = 10;
 	
 	public EightPuzzleDomain() {}
 	
@@ -207,8 +207,7 @@ public class EightPuzzleDomain implements SearchDomain {
 		
 		String up = moveUp(state);
 		if (!up.equals("FAILED")) {
-			a= new Action(state.substring(0, size)+'\n'+state.substring(size, 2*size)+'\n'
-					+state.substring(2*size, puzzleStateSize)+'\n'+"moves UP");
+			a= new Action("up "+state);
 			newState = new MazeGameState(up);
 			double cost = getHiuristicValueOfState(newState, goal);
 			a.setCost((int)(cost));
@@ -217,8 +216,7 @@ public class EightPuzzleDomain implements SearchDomain {
 				
 		String down= moveDown(state);
 		if (!down.equals("FAILED")) {
-			a= new Action(state.substring(0, size)+'\n'+state.substring(size, 2*size)+'\n'
-					+state.substring(2*size, puzzleStateSize)+'\n'+"moves DOWN");
+			a= new Action("down "+state);
 			newState = new MazeGameState(down);
 			double cost = getHiuristicValueOfState(newState, goal);
 			a.setCost((int)(cost));
@@ -227,8 +225,7 @@ public class EightPuzzleDomain implements SearchDomain {
 			
 		String right= moveRight(state);
 		if (!right.equals("FAILED")) {
-			a= new Action(state.substring(0, size)+'\n'+state.substring(size, 2*size)+'\n'
-					+state.substring(2*size, puzzleStateSize)+'\n'+"moves RIGHT");
+			a= new Action("right "+state);
 			newState = new MazeGameState(right);
 			double cost = getHiuristicValueOfState(newState, goal);
 			a.setCost((int)(cost));
@@ -237,8 +234,7 @@ public class EightPuzzleDomain implements SearchDomain {
 			
 		String left= moveLeft(state);
 		if (!left.equals("FAILED")) {
-			a= new Action(state.substring(0, size)+'\n'+state.substring(size, 2*size)+'\n'
-					+state.substring(2*size, puzzleStateSize)+'\n'+"moves LEFT");
+			a= new Action("left "+state);
 			newState = new MazeGameState(left);
 			double cost = getHiuristicValueOfState(newState, goal);
 			a.setCost((int)(cost));

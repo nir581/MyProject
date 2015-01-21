@@ -16,8 +16,8 @@ import model.MyModel;
 public class Presenter implements Observer {
 	//the Observables
 	private Model model;
-	private View view;
-	private WelcomeWindow w;
+	private View view;					//a view window
+	private WelcomeWindow w;			//welcomeWindow
 	private ArrayList<Model> models;	//all running models
 	private static Thread t;			//for the View
 	private UserCommands commands;		//the Factory of Commands
