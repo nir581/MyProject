@@ -65,15 +65,15 @@ public class PuzzleGameBoard extends GameBoard {
 
 		ImageToInt = new HashMap<Integer, Image>();
 
-		ImageToInt.put(1, pic0);
-		ImageToInt.put(2, pic1);
-		ImageToInt.put(3, pic2);
-		ImageToInt.put(4, pic3);
-		ImageToInt.put(5, pic4);
-		ImageToInt.put(6, pic5);
-		ImageToInt.put(7, pic6);
-		ImageToInt.put(8, pic7);
-		ImageToInt.put(0, pic8);
+		ImageToInt.put(0, pic0);
+		ImageToInt.put(1, pic1);
+		ImageToInt.put(2, pic2);
+		ImageToInt.put(3, pic3);
+		ImageToInt.put(4, pic4);
+		ImageToInt.put(5, pic5);
+		ImageToInt.put(6, pic6);
+		ImageToInt.put(7, pic7);
+		ImageToInt.put(8, pic8);
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class PuzzleGameBoard extends GameBoard {
 
 		setLayout(new GridLayout(3, true));
 		setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 2));
-
+		setForeground(new Color(null, 255, 255, 255));
 		setBackground(new Color(null, 255, 255, 255));
 		// redraw();
 
@@ -101,10 +101,8 @@ public class PuzzleGameBoard extends GameBoard {
 							int x = j * w;
 							int y = i * h;
 							Image tmp = ImageToInt.get(board[i][j]);
-							e.gc.drawImage(tmp, 0, 0, tmp.getImageData().width,
-									tmp.getImageData().height, x, y, w - 5,
-									h - 5);
-							e.gc.drawRectangle(x, y, w - 5, h - 5);
+							e.gc.drawImage(tmp, 0, 0, tmp.getImageData().width,tmp.getImageData().height, x, y, w,h);
+							e.gc.drawRectangle(x, y, w, h);
 						}
 				}
 			}
